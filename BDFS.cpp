@@ -137,6 +137,21 @@ void print(adjGraph* G)                    //打印邻接表
 	printf("\n");
 }
 
+bool connect(adjGraph* G)                //判断该图是否连通
+{
+	for(int i = 0; i < G -> n; i ++)
+	{
+		visited[i] = 0;
+	}
+	DFS(G, 1);
+	for(int i = 0; i < G -> n; i ++)
+	{
+		if(visited[i] == 0)
+		return false;
+	}
+	return true;
+}
+
 void destroy(adjGraph* & G)                     //销毁邻接表
 {
 	arcNode* pre, *p;
@@ -185,6 +200,11 @@ int main()
 	DFS1(G);                            
 	printf("\n");
 	BFS1(G);
+	printf("\n");
+	if(connect(G))
+	printf("it is connect!");
+	else
+	printf("it is unconnect!");
 	destroy(G);
 	return 0;
 	
